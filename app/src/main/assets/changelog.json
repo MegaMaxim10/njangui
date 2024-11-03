@@ -1,0 +1,9 @@
+{
+  "1.0.0": {
+    "codeName": "AJEMI-UDs",
+    "date": "{{date}}",
+    "highlights": [
+      "Basic functionality including user login and notifications"
+    ]
+  }
+}

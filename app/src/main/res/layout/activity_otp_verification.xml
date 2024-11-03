@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/otp_verification_title"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="25dp" />
+
+    <TextView
+        android:id="@+id/tvOtpLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_otp"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
+
+    <!-- OTP Entry -->
+    <EditText
+        android:id="@+id/etOtp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_otp"
+        android:inputType="number"
+        android:autofillHints=""
+        android:textCursorDrawable="@drawable/custom_cursor"/>
+
+    <TextView
+        android:id="@+id/tvCountdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_60s_remaining"
+        android:visibility="gone" />
+
+    <!-- Resend OTP Button -->
+    <Button
+        android:id="@+id/btnResendOtp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/resend_otp"
+        android:visibility="gone" />
+
+    <!-- Verify OTP Button -->
+    <Button
+        android:id="@+id/btnVerifyOtp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonAuthStyle"
+        android:text="@string/verify_otp" />
+
+    <!-- Operation Result (Success/Failure) -->
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:visibility="gone" />
+</LinearLayout>

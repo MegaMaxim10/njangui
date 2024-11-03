@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:padding="16dp"
+    android:background="@drawable/drawer_header_background"> <!-- Optional background -->
+
+    <!-- User Avatar -->
+    <ImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_default_avatar"
+        android:contentDescription="@string/avatar_desc"
+        android:layout_gravity="center_horizontal" />
+
+    <!-- User Name -->
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"/>
+
+    <!-- User Email -->
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"/>
+
+    <!-- User Phone -->
+    <TextView
+        android:id="@+id/user_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"/>
+
+</LinearLayout>
