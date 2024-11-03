@@ -1,0 +1,90 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Build Documentation
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  pull_request:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build_docs:
+    runs-on: ubuntu-latest
+    env:
+      DEBIAN_FRONTEND: noninteractive
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: |
+          # Update package list and install essential tools
+          sudo apt-get update
+          sudo apt-get install -y -qq build-essential wget curl xzdec
+
+          # Install a specific version of pandoc
+          PANDOC_VERSION="2.14.2"
+          PANDOC_DEB="pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          wget "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/${PANDOC_DEB}"
+          sudo dpkg -i ${PANDOC_DEB}
+          rm ${PANDOC_DEB}
+
+          # Download and install the latest version of texlive manually
+          REMOTE="http://mirror.ctan.org/systems/texlive/tlnet"
+          INSTALL="/tmp/install-texlive"
+          mkdir -p $INSTALL
+          curl -sSL $REMOTE/install-tl-unx.tar.gz | tar -xzv -C $INSTALL --strip-components=1
+          $INSTALL/install-tl -no-gui -profile .texlife.profile
+          
+          # Set up Texlive PATH
+          VERSION=$($INSTALL/install-tl --version | grep 'version' | grep -o '[0-9]\{4\}')
+          PLATFORM=$($INSTALL/install-tl --print-platform)
+          TEXLIVE_DIR="/usr/local/texlive/${VERSION}"
+          TEXBIN="/usr/local/texlive/${VERSION}/bin/${PLATFORM}"
+          export PATH=$TEXBIN:$PATH
+          
+          # Initialize tlmgr and install necessary packages
+          tlmgr init-usertree
+          tlmgr install adjustbox background bidi csquotes footmisc footnotebackref fvextra mdframed pagecolor sourcecodepro sourcesanspro titling ulem upquote xurl
+          
+          # Additional packages
+          tlmgr install letltxmacro zref everypage framed collectbox
+          tlmgr install xecjk filehook unicode-math ucharcat pagecolor babel-german ly1 mweights sourcecodepro sourcesanspro mdframed needspace fvextra footmisc footnotebackref background
+
+      - name: Build PDF
+        run: |
+          cd docs
+          make pdf
+
+      - name: Build HTML
+        run: |
+          cd docs
+          make html
+
+      - name: Upload PDF Artifact
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: pdf
+          path: docs/build/*.pdf
+
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: actions/deploy-pages@v2
+        with:
+          publish_dir: ./docs/build/html
