@@ -21,7 +21,6 @@ ARGS = --from markdown \
 		--toc \
 		--toc-depth=2 \
 		--variable subparagraph \
-		-f markdown-implicit_figures \
 		--top-level-division=chapter \
 		--highlight-style breezedark \
 		--citeproc \
@@ -37,7 +36,7 @@ PDF_ARGS = $(ARGS) \
 
 HTML_ARGS = $(ARGS) \
 		--standalone \
-		--self-contained
+		--embed-resources
 
 # Default task
 all: clean pdf html
