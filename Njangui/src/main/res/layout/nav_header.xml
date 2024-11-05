@@ -14,7 +14,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_default_avatar"
+        android:src="@drawable/njangui_avatar"
         android:contentDescription="@string/avatar_desc"
         android:layout_gravity="center_horizontal" />
 

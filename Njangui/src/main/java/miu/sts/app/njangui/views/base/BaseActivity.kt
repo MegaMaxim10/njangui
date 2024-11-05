@@ -1,10 +1,12 @@
-package miu.sts.app.njangui.views
+package miu.sts.app.njangui.views.base
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import miu.sts.app.njangui.utils.FirebaseAuthManager
+import miu.sts.app.njangui.views.HomeActivity
+import miu.sts.app.njangui.views.LoginActivity
 
 abstract class BaseActivity : AppCompatActivity() {
 

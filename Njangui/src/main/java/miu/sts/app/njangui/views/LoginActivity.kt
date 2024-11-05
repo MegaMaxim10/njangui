@@ -7,6 +7,7 @@ import android.widget.Toast
 import miu.sts.app.njangui.R
 import miu.sts.app.njangui.databinding.ActivityLoginBinding
 import miu.sts.app.njangui.utils.ProgressDialogHelper
+import miu.sts.app.njangui.views.base.AuthBaseActivity
 
 class LoginActivity : AuthBaseActivity() {
 
@@ -36,7 +37,7 @@ class LoginActivity : AuthBaseActivity() {
         authManager.sendOtp(phoneNumber,
             { verificationId ->
                 progressDialogHelper.hideLoadingSpinner()
-                val intent = Intent(this, OtpVerificationActivity::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 intent.putExtra("verificationId", verificationId)
                 intent.putExtra("action", "login")
                 intent.putExtra("phoneNumber", phoneNumber)

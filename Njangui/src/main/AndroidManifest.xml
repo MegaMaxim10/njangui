@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/njangui_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/njangui_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.NjanguiApp"
         tools:targetApi="31">
@@ -20,38 +20,14 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+
+        <meta-data
+            android:name="android.app.splashScreenTheme"
+            android:resource="@drawable/splash_background" />
     </activity>
-
-    <!-- Register Activity -->
-    <activity android:name=".views.RegisterActivity" />
-
-    <!-- OTP Verification Activity -->
-    <activity android:name=".views.OtpVerificationActivity" />
-
-    <!-- Reset Password Activity -->
-    <activity android:name=".views.ResetPasswordActivity" />
 
     <!-- Home Activity -->
     <activity android:name=".views.HomeActivity" />
-
-    <!-- Notification Activity -->
-    <activity android:name=".views.NotificationActivity" />
-
-    <!-- Firebase Messaging Service -->
-    <service android:name=".services.MyFirebaseMessagingService"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-        </intent-filter>
-    </service>
-
-    <meta-data
-        android:name="com.google.firebase.messaging.default_notification_icon"
-        android:resource="@drawable/ic_notification" />
-
-    <meta-data
-        android:name="com.google.firebase.messaging.default_notification_channel_id"
-        android:value="default_notification_channel" />
 
     </application>
 

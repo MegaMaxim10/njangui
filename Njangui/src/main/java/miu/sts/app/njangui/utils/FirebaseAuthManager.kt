@@ -1,8 +1,6 @@
 package miu.sts.app.njangui.utils
 
 import android.app.Activity
-import android.util.Log
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
@@ -11,8 +9,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.messaging.FirebaseMessaging
 import java.util.concurrent.TimeUnit
 
 class FirebaseAuthManager(private val activity: Activity?, private val auth: FirebaseAuth) {
@@ -86,41 +82,6 @@ class FirebaseAuthManager(private val activity: Activity?, private val auth: Fir
                     }
                 }
         }
-    }
-
-    fun updateUserDevice(onComplete: (Boolean, Exception?) -> Unit) {
-        val user = auth.currentUser ?: return onComplete(false, Exception("No authenticated user"))
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            // Get new FCM registration token
-            val token = task.result
-
-            val uid = user.uid
-            val firestore = FirebaseFirestore.getInstance()
-
-            val deviceData = hashMapOf(
-                "token" to token,
-                "userId" to uid
-            )
-
-            // Save the user data in Firestore under the user's uid
-            firestore.collection("devices").document(uid)
-                .set(deviceData)
-                .addOnCompleteListener { saveTask ->
-                    Log.e("ERROR", saveTask.isSuccessful.toString(), saveTask.exception)
-                    if (saveTask.isSuccessful) {
-                        // All operations successful
-                        onComplete(true, null)
-                    } else {
-                        // Firestore save failed
-                        onComplete(false, saveTask.exception)
-                    }
-                }
-        })
     }
 
     fun login(credential: AuthCredential, onComplete: (Boolean, Exception?) -> Unit) {

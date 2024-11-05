@@ -18,7 +18,7 @@
         android:contentDescription="@string/logo_description"
         android:maxWidth="100dp"
         android:maxHeight="100dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/njangui_logo" />
 
     <!-- Titre -->
     <TextView

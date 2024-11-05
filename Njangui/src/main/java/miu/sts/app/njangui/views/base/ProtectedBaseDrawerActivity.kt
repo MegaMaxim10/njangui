@@ -1,6 +1,5 @@
-package miu.sts.app.njangui.views
+package miu.sts.app.njangui.views.base
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -47,9 +46,6 @@ open class ProtectedBaseDrawerActivity : ProtectedBaseActivity() {
                 R.id.nav_logout -> {
                     authManager.logout()
                     redirectToLogin()
-                }
-                R.id.nav_push_notification -> {
-                    startActivity(Intent(this, NotificationActivity::class.java))
                 }
             }
             drawerBinding.drawerLayout.closeDrawer(GravityCompat.START)

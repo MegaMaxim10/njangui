@@ -29,7 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:background="@drawable/input_auth"
         android:hint="@string/enter_phone_number"
         android:inputType="phone"
         android:textCursorDrawable="@drawable/custom_cursor"/>
@@ -47,7 +46,6 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        style="@style/ButtonAuthStyle"
         android:layout_marginTop="18dp"
         android:text="@string/login" />
 
