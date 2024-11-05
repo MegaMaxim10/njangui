@@ -78,6 +78,7 @@ jobs:
           $INSTALL/install-tl -no-gui -profile $INSTALL/texlive.profile
           
           # Set up PATH for the installed TeX Live binaries
+          export PATH="$TEXLIVE_HOME/bin/x86_64-linux:$PATH"
           echo "$TEXLIVE_HOME/bin/x86_64-linux" >> $GITHUB_PATH
           
           # Initialize tlmgr and install necessary packages
