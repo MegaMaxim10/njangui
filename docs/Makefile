@@ -7,7 +7,8 @@
 
 # Output directory and filename
 BUILD = build
-OUTPUT_FILENAME = Documentation
+PDF_OUTPUT_FILENAME = NjanguiDocumentation
+HTML_OUTPUT_FILENAME = index
 
 # Additional Metadata
 METADATA = metadata.yml
@@ -42,8 +43,8 @@ HTML_ARGS = $(ARGS) \
 all: clean pdf html
 
 # Build tasks for individual formats
-pdf: $(BUILD)/$(OUTPUT_FILENAME).pdf
-html: $(BUILD)/$(OUTPUT_FILENAME).html
+pdf: $(BUILD)/$(PDF_OUTPUT_FILENAME).pdf
+html: $(BUILD)/$(HTML_OUTPUT_FILENAME).html
 
 # Clean the build directory
 .PHONY : clean
@@ -51,11 +52,11 @@ clean:
 	rm -rf $(BUILD)
 
 # Build a pdf
-$(BUILD)/$(OUTPUT_FILENAME).pdf: $(METADATA) $(SOURCE)
+$(BUILD)/$(PDF_OUTPUT_FILENAME).pdf: $(METADATA) $(SOURCE)
 	mkdir -p $(BUILD)
 	pandoc $(PDF_ARGS) -o $@ $^
 
 # Build an HTML file
-$(BUILD)/$(OUTPUT_FILENAME).html: $(METADATA) $(SOURCE)
+$(BUILD)/$(HTML_OUTPUT_FILENAME).html: $(METADATA) $(SOURCE)
 	mkdir -p $(BUILD)
 	pandoc $(HTML_ARGS) -o $@ $^
