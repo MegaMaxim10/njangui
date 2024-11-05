@@ -14,4 +14,4 @@ dependencyResolutionManagement {
 }
 def ProjectName = "NjanguiApp"
 rootProject.name = ProjectName
-include ':app'
+include ':Njangui'

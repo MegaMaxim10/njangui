@@ -45,18 +45,38 @@ jobs:
           rm ${PANDOC_DEB}
 
           # Download and install the latest version of texlive manually
+          # Set up installation directory and CTAN mirror
           REMOTE="http://mirror.ctan.org/systems/texlive/tlnet"
           INSTALL="/tmp/install-texlive"
           mkdir -p $INSTALL
-          curl -sSL $REMOTE/install-tl-unx.tar.gz | tar -xzv -C $INSTALL --strip-components=1
-          $INSTALL/install-tl -no-gui -profile .texlife.profile
           
-          # Set up Texlive PATH
-          VERSION=$($INSTALL/install-tl --version | grep 'version' | grep -o '[0-9]\{4\}')
-          PLATFORM=$($INSTALL/install-tl --print-platform)
-          TEXLIVE_DIR="/usr/local/texlive/${VERSION}"
-          TEXBIN="/usr/local/texlive/${VERSION}/bin/${PLATFORM}"
-          export PATH=$TEXBIN:$PATH
+          # Download and extract the installer
+          curl -sSL $REMOTE/install-tl-unx.tar.gz | tar -xzv -C $INSTALL --strip-components=1
+          
+          # Create a TeX Live profile for non-interactive installation
+          cat <<EOF > $INSTALL/texlive.profile
+TEXDIR /usr/local/texlive
+TEXMFCONFIG ~/.texlive/texmf-config
+TEXMFHOME ~/texmf
+TEXMFLOCAL /usr/local/texlive/texmf-local
+TEXMFSYSCONFIG /usr/local/texlive/texmf-config
+TEXMFSYSVAR /usr/local/texlive/texmf-var
+TEXMFVAR ~/.texlive/texmf-var
+collection-basic 1
+collection-latex 1
+collection-latexrecommended 1
+collection-fontsrecommended 1
+collection-luatex 1
+collection-xetex 1
+option_doc 0
+option_src 0
+EOF
+
+          # Run the TeX Live installer in non-interactive mode
+          $INSTALL/install-tl -no-gui -profile $INSTALL/texlive.profile
+          
+          # Set up PATH for the installed TeX Live binaries
+          echo "/usr/local/texlive/$(date +%Y)/bin/x86_64-linux" >> $GITHUB_PATH
           
           # Initialize tlmgr and install necessary packages
           tlmgr init-usertree
