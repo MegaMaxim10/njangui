@@ -19,31 +19,43 @@ SOURCE = $(shell ls src/*.md)
 ARGS = --from markdown \
 		--toc \
 		--toc-depth=2 \
-		--template="./templates/eisvogel.tex" \
 		--variable subparagraph \
 		-f markdown-implicit_figures \
+		--top-level-division=chapter \
+		--highlight-style breezedark \
+		--citeproc \
+		--csl=bibliography.csl
+
+PDF_ARGS = $(ARGS) \
+		--template="./templates/eisvogel.tex" \
 		-V papersize:a4 \
 		-V book \
 		-V classoption=oneside \
-		--top-level-division=chapter \
 		--pdf-engine=xelatex \
-		--highlight-style breezedark \
-		--citeproc \
-		--csl=bibliography.csl \
 		--listings 
 
+HTML_ARGS = $(ARGS) \
+		--standalone \
+		--self-contained
+
 # Default task
-all: clean pdf
+all: clean pdf html
 
 # Build tasks for individual formats
 pdf: $(BUILD)/$(OUTPUT_FILENAME).pdf
+html: $(BUILD)/$(OUTPUT_FILENAME).html
 
 # Clean the build directory
 .PHONY : clean
 clean:
-	rm -r $(BUILD)
+	rm -rf $(BUILD)
 
 # Build a pdf
 $(BUILD)/$(OUTPUT_FILENAME).pdf: $(METADATA) $(SOURCE)
 	mkdir -p $(BUILD)
-	pandoc $(ARGS) -o $@ $^
+	pandoc $(PDF_ARGS) -o $@ $^
+
+# Build an HTML file
+$(BUILD)/$(OUTPUT_FILENAME).html: $(METADATA) $(SOURCE)
+	mkdir -p $(BUILD)
+	pandoc $(HTML_ARGS) -o $@ $^
