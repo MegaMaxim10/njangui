@@ -47,12 +47,4 @@ echo "Test" > /tmp/banane.txt
 
 ### Image
 
-\begin{figure}
-  \centering
-  \includegraphics{images/image.jpg}
-  \caption{Sample image}
-  \label{fig:sample-image}
-\end{figure}
-
-<img src="images/image.jpg" alt="Alt text" width="500" title="Optional title text">
 ![Alt text](images/image.jpg "Optional title text")

@@ -27,7 +27,7 @@ ARGS = --from markdown \
 		--csl=bibliography.csl
 
 PDF_ARGS = $(ARGS) \
-		--template="./templates/eisvogel.tex" \
+		--template="./templates/eisvogel.latex" \
 		-V papersize:a4 \
 		-V book \
 		-V classoption=oneside \
