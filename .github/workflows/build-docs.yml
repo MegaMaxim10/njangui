@@ -38,7 +38,7 @@ jobs:
           sudo apt-get install -y -qq build-essential wget curl xzdec
 
           # Install a specific version of pandoc
-          PANDOC_VERSION="2.14.2"
+          PANDOC_VERSION="3.5"
           PANDOC_DEB="pandoc-${PANDOC_VERSION}-1-amd64.deb"
           wget "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/${PANDOC_DEB}"
           sudo dpkg -i ${PANDOC_DEB}
@@ -72,6 +72,16 @@ jobs:
           collection-xetex 1
           option_doc 0
           option_src 0
+          selected_scheme scheme-basic
+          instopt_adjustpath 1
+          collection-bibtexextra 0
+          collection-fontsextra 0
+          collection-langchinese 0
+          collection-latexextra 0
+          collection-mathscience 0
+          tlpdbopt_autobackup 0
+          tlpdbopt_install_docfiles 0
+          tlpdbopt_install_srcfiles 0
           EOF
 
           # Run the TeX Live installer in non-interactive mode
@@ -98,6 +108,7 @@ jobs:
         run: |
           cd docs
           make html
+          ls -lR
 
       - name: Upload PDF Artifact
         if: success()
@@ -106,15 +117,14 @@ jobs:
           name: pdf
           path: docs/build/*.pdf
           
-      - name: Upload HTML Artifact
-        if: success()
-        uses: actions/upload-artifact@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: html
-          path: docs/build/*.html
-
+          path: 'docs/build'
+          
       - name: Deploy to GitHub Pages
-        if: success()
-        uses: actions/deploy-pages@v2
-        with:
-          artifact_name: html
+        id: deployment
+        uses: actions/deploy-pages@v4
