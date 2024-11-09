@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Njangui</string>
+    <string name="register">S\'inscrire</string>
+    <string name="reset_password">Mot de passe oublié ?</string>
+    <string name="logout">Déconnexion</string>
+    <string name="register_title">Créer un compte</string>
+    <string name="password_label">Mot de passe</string>
+    <string name="password">Entrez le mot de passe</string>
+    <string name="error_invalid_password">Mot de passe invalide. Il doit comporter au moins 8 caractères et contenir une combinaison de lettres et de chiffres.</string>
+    <string name="confirm_password_label">Confirmer le mot de passe</string>
+    <string name="confirm_password">Entrez le mot de passe</string>
+    <string name="email_label">Email</string>
+    <string name="enter_email">Entrez l\'email</string>
+    <string name="error_invalid_email">Cet email n\'est pas au bon format</string>
+    <string name="error_password_mismatch">Le mot de passe de confirmation ne correspond pas au mot de passe</string>
+    <string name="login_title">Connexion</string>
+    <string name="login">Se connecter</string>
+    <string name="logged_in">Connexion réussie</string>
+    <string name="login_failure">Échec de la connexion</string>
+    <string name="registered">Compte créé avec succès</string>
+    <string name="registration_failure">Échec de la création du compte</string>
+    <string name="email_reset_success">Email de réinitialisation du mot de passe envoyé. Veuillez vérifier votre boîte de réception.</string>
+    <string name="email_reset_failure">Impossible d\'envoyer l\'email de réinitialisation du mot de passe</string>
+    <string name="send_reset_email">Envoyer l\'email</string>
+    <string name="home_title">Écran d\'accueil</string>
+    <string name="navigation_drawer_open">Ouverture du menu</string>
+    <string name="navigation_drawer_close">Fermeture du menu</string>
+    <string name="welcome_to_the_home_activity">Bienvenue dans l\'activité d\'accueil</string>
+    <string name="not_available">N/D</string>
+    <string name="avatar_desc">Avatar</string>
+    <string name="loading">Chargement, veuillez patienter…</string>
+    <string name="reset_password_title">Réinitialisation du mot de passe</string>
+    <string name="error_empty_password">Le mot de passe est vide</string>
+    <string name="operation_success">Opération réussie</string>
+    <string name="operation_failed">Échec de l\'opération</string>
+    <string name="warning">Attention</string>
+    <string name="version_text">v%1$s (%2$d) - %3$s</string>
+    <string name="press_back_again_to_exit">Appuyer à nouveau sur la touche retour pour quitter</string>
+    <string name="tontine_groups">Groupes de tontine</string>
+</resources>

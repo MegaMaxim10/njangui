@@ -9,12 +9,13 @@
         android:icon="@drawable/njangui_logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/njangui_logo"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.NjanguiApp"
         tools:targetApi="31">
 
     <!-- Main Activity -->
-    <activity android:name=".views.LoginActivity"
+        <activity
+            android:name=".views.LoginActivity"
         android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -28,6 +29,13 @@
 
     <!-- Home Activity -->
     <activity android:name=".views.HomeActivity" />
+
+        <!-- Register Activity -->
+        <activity android:name=".views.RegisterActivity" />
+
+        <!-- Password Reset Activity -->
+        <activity android:name=".views.ResetPasswordActivity" />
+
 
     </application>
 

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Theme.NjanguiApp" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowSplashScreenBackground">@color/purple_200</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_background</item>
-        <item name="android:windowSplashScreenIconBackgroundColor">@color/purple_200</item>
-    </style>
-</resources>
