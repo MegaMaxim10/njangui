@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlinx-serialization'
 }
 
 android {
@@ -11,15 +12,42 @@ android {
         applicationId "miu.sts.app.njangui"
         minSdk 26
         targetSdk 35
-        versionCode 1
+        versionCode 3
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        android.buildFeatures.buildConfig true
+    }
+
+    def configPropertiesFile = rootProject.file("config.properties")
+    def configProperties = new Properties()
+    if (configPropertiesFile.exists()) {
+        configProperties.load(new FileInputStream(configPropertiesFile))
+    } else {
+        throw new GradleException("Config file not found: ${configPropertiesFile}")
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("${configProperties['PROD_KEYSTORE_FILE']}")
+            storePassword "${configProperties['PROD_KEYSTORE_PASSWORD']}"
+            keyAlias "${configProperties['PROD_KEYSTORE_ALIAS']}"
+            keyPassword "${configProperties['PROD_KEYSTORE_KEY_PASSWORD']}"
+        }
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "DB_SUFFIX", "\"${configProperties['DEV_DB_SUFFIX']}\""
+            buildConfigField "String", "CODE_NAME", "\"${configProperties['CODE_NAME']}\""
+        }
         release {
-            minifyEnabled false
+            buildConfigField("String", "DB_SUFFIX", "\"${configProperties['PROD_DB_SUFFIX']}\"")
+            buildConfigField "String", "CODE_NAME", "\"${configProperties['CODE_NAME']}\""
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -39,13 +67,14 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.core:core-ktx:1.15.0'
-    implementation 'com.github.bumptech.glide:glide:4.15.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 
-    implementation platform('com.google.firebase:firebase-bom:32.2.3')
+    implementation platform('com.google.firebase:firebase-bom:33.5.1')
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-auth'
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<miu.sts.app.njangui.views.components.CustomDrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
@@ -8,7 +8,6 @@
 
     <!-- Main content with Toolbar -->
     <LinearLayout
-        android:id="@+id/toolbar_and_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -40,6 +39,36 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/drawer_menu"
-        app:headerLayout="@layout/nav_header" /> <!-- Reference to custom header layout -->
+        app:headerLayout="@layout/nav_header">
 
-</androidx.drawerlayout.widget.DrawerLayout>
+        <LinearLayout
+            android:id="@+id/menu_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <Spinner
+                android:id="@+id/languageSpinner"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/appInfos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.navigation.NavigationView>
+
+</miu.sts.app.njangui.views.components.CustomDrawerLayout>

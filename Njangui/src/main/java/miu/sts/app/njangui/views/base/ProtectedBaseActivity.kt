@@ -1,7 +1,6 @@
 package miu.sts.app.njangui.views.base
 
 import android.os.Bundle
-import miu.sts.app.njangui.views.base.BaseActivity
 
 abstract class ProtectedBaseActivity : BaseActivity() {
 
